@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Christopher Burt — AI Automation Engineer</title>
+  <meta name="description" content="Christopher Burt is an AI Automation Engineer building intelligent systems, multi-agent frameworks, and production-grade ML platforms." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="#home" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="#home" class="nav-link" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="section hero">
+      <div class="hero-inner">
+        <p class="eyebrow reveal">AI Automation Engineer</p>
+        <h1 class="reveal">
+          Building intelligent systems<br />
+          that <span class="gradient-text">think, act, and scale.</span>
+        </h1>
+        <p class="lede reveal">
+          I'm Christopher Burt — an AI Automation Engineer focused on the practical work of
+          bringing AI into the enterprise. From agentic systems and retrieval-augmented
+          chatbots to rollouts, governance, and the engineering glue that keeps it all
+          reliable in production.
+        </p>
+        <div class="hero-cta reveal">
+          <a href="#about" class="btn btn-primary">See what I do</a>
+          <a href="#contact" class="btn btn-ghost">Get in touch →</a>
+        </div>
+
+        <div class="hero-tools reveal" aria-label="Tools and platforms I work with">
+          <span class="hero-tools-label">Working with</span>
+          <ul>
+            <li>OpenAI</li>
+            <li>Anthropic</li>
+            <li>LangChain</li>
+            <li>LlamaIndex</li>
+            <li>Pinecone</li>
+            <li>Glean</li>
+            <li>LangSmith</li>
+            <li>n8n</li>
+            <li>ElevenLabs</li>
+          </ul>
+        </div>
+      </div>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about">
+      <div class="section-head">
+        <p class="eyebrow reveal">About / Capabilities</p>
+        <h2 class="reveal">A toolkit for the <span class="gradient-text">AI-native enterprise.</span></h2>
+        <p class="section-lede reveal">
+          I work across the full stack of modern AI delivery — from foundation models and
+          agent frameworks to enterprise rollout, governance, and the unglamorous engineering
+          that keeps everything running in production.
+        </p>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar reveal">
+          <div class="pillar-num">01</div>
+          <h3>Core AI &amp; ML Engineering</h3>
+          <ul class="capabilities">
+            <li>
+              <strong>LLMs &amp; frameworks</strong>
+              <span>Hands-on with the OpenAI API, Claude, and Llama, plus orchestration frameworks like LangChain, LlamaIndex, and emerging autonomous-agent frameworks such as CrewAI.</span>
+            </li>
+            <li>
+              <strong>Retrieval-Augmented Generation</strong>
+              <span>Connecting LLMs to enterprise data sources to reduce hallucinations and improve accuracy. Experience building enterprise RAG-powered chatbots for support and knowledge use cases.</span>
+            </li>
+            <li>
+              <strong>Vector databases</strong>
+              <span>Working knowledge of Pinecone, Milvus, and Weaviate for semantic search and retrieval at scale.</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="pillar reveal">
+          <div class="pillar-num">02</div>
+          <h3>AI Automation &amp; Agentic Systems</h3>
+          <ul class="capabilities">
+            <li>
+              <strong>Agentic workflow architecture</strong>
+              <span>Designing multi-agent systems that can reason, plan, use tools, and execute multi-step tasks independently.</span>
+            </li>
+            <li>
+              <strong>Workflow automation platforms</strong>
+              <span>Experience across n8n, Glean, Replit, ElevenLabs, and Zapier — including voice agents implemented for local small businesses.</span>
+            </li>
+            <li>
+              <strong>API &amp; tool integration</strong>
+              <span>Giving AI agents "hands" by connecting them to enterprise systems like Salesforce, Slack, and Databricks via REST APIs.</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="pillar reveal">
+          <div class="pillar-num">03</div>
+          <h3>Enterprise Rollout &amp; Governance</h3>
+          <ul class="capabilities">
+            <li>
+              <strong>AI implementation</strong>
+              <span>Experience with the rollout and adoption of enterprise AI search and discovery platforms.</span>
+            </li>
+            <li>
+              <strong>Context engineering &amp; advanced reasoning</strong>
+              <span>Moving beyond basic prompts into techniques like Chain-of-Thought, Tree-of-Thoughts, and few-shot prompting.</span>
+            </li>
+            <li>
+              <strong>AI governance</strong>
+              <span>Deeply knowledgeable of the AI development lifecycle: data privacy, access controls so models don't surface restricted data to unauthorized users, and evaluating outputs for safety and compliance.</span>
+            </li>
+          </ul>
+        </article>
+
+        <article class="pillar reveal">
+          <div class="pillar-num">04</div>
+          <h3>Software Engineering Foundations</h3>
+          <ul class="capabilities">
+            <li>
+              <strong>Programming languages</strong>
+              <span>Deep proficiency in Python, with working experience in Java and TypeScript for enterprise backend integration.</span>
+            </li>
+            <li>
+              <strong>CI/CD &amp; MLOps</strong>
+              <span>Version control with Git and PR-driven workflows, model and agent monitoring with tools like LangSmith, and deploying solutions through automated pipelines.</span>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="contact-grid">
+        <div class="contact-copy">
+          <p class="eyebrow reveal">Contact</p>
+          <h2 class="reveal">Let's <span class="gradient-text">connect!</span></h2>
+          <p class="reveal">
+            I'm always open to interesting AI conversations — happy to chat about the
+            space, swap notes, or stay in touch.
+          </p>
+          <ul class="contact-meta reveal">
+            <li><span>Email</span><a href="mailto:christopher.r.burt@gmail.com">christopher.r.burt@gmail.com</a></li>
+            <li><span>Based</span>Remote · United States</li>
+          </ul>
+        </div>
+
+        <form id="contact-form" class="contact-form reveal"
+              action="https://formspree.io/f/xrejnyep"
+              method="POST"
+              novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="company">Company <span class="optional">(optional)</span></label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="message">How can I help?</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+          <input type="hidden" name="_subject" value="New inquiry from christopherburt.com" />
+          <button type="submit" class="btn btn-primary btn-block">
+            <span class="btn-label">Send message</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

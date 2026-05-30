@@ -1,0 +1,14 @@
+{
+  "name": "christopher-burt-site",
+  "version": "1.0.0",
+  "description": "Personal site for Christopher Burt — AI Automation Engineer.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "leo-profanity": "^1.7.0"
+  }
+}

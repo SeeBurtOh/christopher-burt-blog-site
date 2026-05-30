@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome — what this blog is for · Christopher Burt</title>
+  <meta name="description" content="A short intro to what this blog is for: practical AI engineering, agent architectures, and the trends actually worth your attention." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Meta</p>
+        <h1 class="reveal">Welcome — what this blog is for.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-15">May 15, 2026</time>
+          <span class="post-dot">·</span>
+          <span>3 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>
+          If you're reading this, you've stumbled onto the first post on a blog I've
+          been meaning to start for a while. The plan is simple: a place to think out
+          loud about AI — the parts that actually matter once you move past the demo,
+          and the parts I find genuinely interesting from the engineering seat.
+        </p>
+
+        <h2>What I'll write about</h2>
+        <p>
+          My day-to-day is in the messy middle of AI: turning capabilities that look
+          magical in a notebook into systems an organization can quietly depend on.
+          That's the lens you should expect from most of what shows up here. A few
+          themes I keep coming back to:
+        </p>
+        <ul>
+          <li>
+            <strong>Agents in the real world.</strong> What actually works when you
+            give an LLM tools, memory, and a goal — and what falls apart the moment
+            it leaves the demo.
+          </li>
+          <li>
+            <strong>Retrieval that doesn't lie.</strong> RAG is easy to stand up and
+            hard to make trustworthy. I want to write about the boring parts that
+            decide whether it ships.
+          </li>
+          <li>
+            <strong>Evals and observability.</strong> The unglamorous infrastructure
+            that separates "it worked once" from "it works on Monday morning."
+          </li>
+          <li>
+            <strong>Enterprise reality.</strong> Governance, access controls,
+            adoption, and the human side of rolling AI into an organization that
+            wasn't designed for it.
+          </li>
+        </ul>
+
+        <h2>What I won't do</h2>
+        <p>
+          I'm not going to chase every new model release or write breathless takes on
+          whatever launched yesterday. The pace of the space is exhausting enough
+          without another newsletter adding to it. If something genuinely changes
+          how I work, I'll write about it. Otherwise I'd rather go deep on fewer
+          ideas than skim across many.
+        </p>
+
+        <h2>A note on perspective</h2>
+        <p>
+          I'm writing as a practitioner, not an analyst. Expect concrete examples,
+          opinionated takes, and the occasional admission that something I tried
+          didn't pan out. If a post here saves you an afternoon of debugging or
+          shifts how you think about a problem, it's done its job.
+        </p>
+
+        <p>
+          More soon. If something here resonates — or you disagree with it — the
+          <a href="/#contact">contact page</a> is the best way to reach me.
+        </p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="welcome" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
