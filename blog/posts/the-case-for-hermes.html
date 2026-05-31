@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The case for Hermes · Christopher Burt</title>
+  <meta name="description" content="Nous Research's Hermes Agent is open-source, self-hosted, and free — but the thing that matters is what it bets on: an agent that actually grows with you, not a stateless harness that forgets every session." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Agents · Tools</p>
+        <h1 class="reveal">The case for Hermes.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-30">May 30, 2026</time>
+          <span class="post-dot">·</span>
+          <span>6 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>
+          I've spent the last few weekends with <a href="https://github.com/nousresearch/hermes-agent">Hermes Agent</a>
+          — Nous Research's open-source autonomous agent — and I keep going back to it
+          after closing the laptop, which is the most useful signal I know for whether
+          a tool is doing something genuinely new.
+        </p>
+        <p>
+          I came to Hermes after a stint with <a href="https://openclaw.ai">OpenClaw</a>,
+          which I also liked. On paper they look like cousins: open-source, self-hosted,
+          bring-your-own-LLM, designed to live behind your messaging apps and act on
+          your behalf. But they're actually betting on two different ideas about what a
+          personal agent should be, and the difference shows up more the longer you use
+          them.
+        </p>
+
+        <h2>The bet most agent harnesses are making</h2>
+        <p>
+          Most agent harnesses today — OpenClaw very much included — are designed to be
+          excellent <em>bridges</em>. You ask the agent a thing, it figures out which
+          tools to call, it does the thing, the conversation ends. The next time you
+          come back, you're starting fresh. The agent has no real idea what your
+          projects are, what your preferences are, what worked last time, or what
+          you've asked it to do twelve times before.
+        </p>
+        <p>
+          That's fine for most use cases — actually great for them. Bridges are useful.
+          But it caps what a personal agent can become. It stays a very capable
+          calculator forever.
+        </p>
+
+        <h2>The bet Hermes is making</h2>
+        <p>
+          The Hermes README opens with a line that I think captures the whole project:
+          <em>"the agent that grows with you."</em> That's the bet. What if the agent
+          actually accumulated something? Not by retraining the underlying model — that's
+          someone else's problem — but by building up its own structured memory of you,
+          your work, and the skills it picks up along the way?
+        </p>
+        <p>The pieces that make this concrete:</p>
+        <ul>
+          <li>
+            <strong>Persistent memory with self-curation.</strong> The agent doesn't just
+            log conversations — it nudges itself to retain things worth retaining, and
+            it can search across past sessions with LLM-summarized recall. Your context
+            isn't reset every time you say hello.
+          </li>
+          <li>
+            <strong>Skills that auto-create from experience.</strong> When Hermes works
+            through a complex task, it can save the procedure as a reusable skill. The
+            next time you ask for something similar, it pulls from what it learned. The
+            skills format is compatible with <a href="https://agentskills.io">agentskills.io</a>,
+            an emerging open standard, so they're portable — you can share them, fork
+            them, or pull in ones the community has built.
+          </li>
+          <li>
+            <strong>A dialectic user model.</strong> Built on Honcho, a system designed
+            specifically to build deepening profiles of users across sessions. Hermes's
+            internal model of you isn't wiped on every conversation.
+          </li>
+          <li>
+            <strong>Built-in scheduling.</strong> A cron-style scheduler lets you wire
+            up unattended tasks — daily reports, weekly digests, nightly backups — and
+            the agent runs them autonomously, then reports back via whichever messaging
+            channel you've connected.
+          </li>
+        </ul>
+
+        <h2>The detail that made me laugh</h2>
+        <p>
+          Buried in the Hermes docs is a command: <code>hermes claw migrate</code>.
+        </p>
+        <p>
+          It imports your settings, memories, skills, and API keys directly from an
+          OpenClaw install. Nous is making it deliberately easy to defect from
+          OpenClaw and bring everything with you. That's a confident move, and it
+          tells you exactly how the team thinks about their position in the space.
+          It's the kind of detail that says "we know what we're building, and we know
+          why someone would switch."
+        </p>
+
+        <h2>What it actually feels like to use</h2>
+        <p>
+          A few sessions in, Hermes starts to feel less like a tool you summon and
+          more like an environment you live in. The shift is subtle but real:
+        </p>
+        <ul>
+          <li>
+            <strong>Project context that sticks.</strong> Tell it once that you're
+            building a personal site with Netlify Functions and a specific design
+            system, and that context shapes every subsequent answer. You stop
+            re-pasting your stack into every prompt.
+          </li>
+          <li>
+            <strong>Workflow capture.</strong> Walk it through a multi-step task — pull
+            data, filter it, summarize, post to Slack — and the next time you ask, it
+            executes the captured skill instead of re-deriving the steps.
+          </li>
+          <li>
+            <strong>Cross-session recall.</strong> You can reference work from a week
+            ago without needing to re-summarize it. "That report we worked through on
+            Tuesday" actually resolves to the right thing.
+          </li>
+          <li>
+            <strong>One agent, every surface.</strong> The same Hermes instance
+            answers from the CLI, Telegram, Slack, Discord, email — whatever you've
+            wired up. Same memory, same skills, same model preferences, regardless of
+            where the conversation happens.
+          </li>
+        </ul>
+
+        <h2>Getting started</h2>
+        <p>
+          Hermes is genuinely easy to install. On macOS or Linux:
+        </p>
+        <pre><code>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+source ~/.bashrc &amp;&amp; hermes</code></pre>
+        <p>
+          That drops you into the configuration wizard. Connect a model provider
+          (OpenAI, Anthropic, OpenRouter, Nous Portal, or one of 200+ options),
+          decide which tools to enable, and you're in a working CLI session.
+        </p>
+        <p>A few commands worth knowing right away:</p>
+        <ul>
+          <li><code>hermes</code> — start the TUI</li>
+          <li><code>hermes setup</code> — full configuration wizard</li>
+          <li><code>hermes gateway</code> — start the messaging gateway (Telegram / Slack / Discord / etc.)</li>
+          <li><code>hermes model</code> — switch LLM provider on the fly, no code changes</li>
+          <li><code>hermes tools</code> — enable or disable specific tools</li>
+          <li><code>hermes doctor</code> — diagnose configuration issues</li>
+        </ul>
+        <p>
+          If you're already on OpenClaw: <code>hermes claw migrate</code> will pull
+          everything across. Worth trying side by side for a week before deciding
+          which one stays.
+        </p>
+
+        <h2>What to know going in</h2>
+        <p>
+          A few things I'd want someone to tell me before they sank a weekend into this:
+        </p>
+        <ul>
+          <li>
+            <strong>It's self-hosted, which means you're the ops team.</strong> "Runs
+            anywhere" is genuine — a $5 VPS works fine — but you're responsible for
+            keeping it running and updated. That's the trade for owning your data and
+            paying nothing for the harness itself.
+          </li>
+          <li>
+            <strong>Memory is a feature and a footgun.</strong> The fact that Hermes
+            remembers everything is the whole point. It also means you should think
+            about what you tell it the way you'd think about what you store in a
+            password manager, not the way you'd think about a stateless chat. Back
+            things up.
+          </li>
+          <li>
+            <strong>You still pay your model provider.</strong> Hermes is free; the
+            LLM behind it is not. Budget accordingly, especially with autonomous
+            workflows that can chew through tokens unattended.
+          </li>
+          <li>
+            <strong>It's moving fast.</strong> The repo is active and the feature set
+            is shifting week to week. That's a feature if you like being early, a bug
+            if you want stability. Pin a version and update deliberately.
+          </li>
+        </ul>
+
+        <h2>Where this points</h2>
+        <p>
+          The frame I keep coming back to: most agent tools today are still selling
+          you a smarter <em>session</em>. Hermes is selling you a smarter
+          <em>relationship</em>. Whether that's worth the added complexity depends
+          entirely on what you want a personal agent to be — but if the answer is
+          "something that actually grows with me," it's the most coherent attempt at
+          that I've seen.
+        </p>
+        <p>
+          Either way, the next year of agent tooling is going to be defined by this
+          split: stateless harnesses optimizing for the perfect single turn vs.
+          stateful agents optimizing for the long arc. Hermes is the clearest bet on
+          the second answer, and it's worth a weekend just to feel the difference.
+        </p>
+
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-case-for-hermes" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
