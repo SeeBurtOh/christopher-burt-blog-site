@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The evidence trail is the product · Christopher Burt</title>
+  <meta name="description" content="Long context helps AI systems see more, but evidence trails are what make their answers trustworthy enough for real workflows." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Evals · Retrieval</p>
+        <h1 class="reveal">The evidence trail is the product.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-01">June 01, 2026</time>
+          <span class="post-dot">·</span>
+          <span>6 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>More context is not the same thing as more understanding. Sometimes it is just a bigger junk drawer.</p>
+
+        <p>I keep coming back to that because the AI industry has been treating context windows like a magic storage unit. Add more tokens, shove in more documents, ask a bigger question, hope the model sorts it out. The demo looks great when the answer is sitting cleanly in paragraph three.</p>
+
+        <p>Real work is messier.</p>
+
+        <p>Production systems have stale docs, conflicting tickets, old design notes, duplicate requirements, half-remembered Slack threads, and that one PDF someone uploaded in 2022 that still haunts the architecture. If an AI system gives me an answer from that pile, I don't only want the answer. I want the trail.</p>
+
+        <p>I want to know what it used, what it ignored, and why the conclusion follows.</p>
+
+        <h2>Long context moved the goalpost</h2>
+
+        <p>Long context is useful — I'm not here to throw it into the nearest lake with the other overhyped tools. Being able to fit a large codebase, a long policy document, or a messy research bundle into one model call changes what we can build.</p>
+
+        <p>But long context also creates a new failure mode: the system can sound more informed while becoming harder to inspect.</p>
+
+        <p>That's the uncomfortable part. When a model has access to twenty pages, a bad answer is annoying. When it has access to twenty thousand pages, a bad answer becomes harder to debug because the possible source of failure is now everywhere. The model may have missed the right passage, over-weighted the wrong one, fused two unrelated ideas, or confidently cited a document that was only adjacent to the truth.</p>
+
+        <p>Congratulations. The haystack is now enterprise-grade.</p>
+
+        <h2>The research is pointing at the right problem</h2>
+
+        <p>Recent research on long-context reasoning is starting to focus on the part that actually matters in production: the path through the evidence. The final answer is only one artifact — the route matters too.</p>
+
+        <p>That matters because real retrieval is full of distractors. Some documents are obviously irrelevant. Others are dangerous because they're almost relevant. They use the same words. They mention the same system. They look helpful until they quietly send the model down the wrong hallway.</p>
+
+        <p>Those are the documents that break production systems.</p>
+
+        <p>Recent arXiv work around retrieval evaluation, long-context reasoning, and synthetic test collections points in the same direction: we need to test systems against controlled mess, not sanitized examples that politely step out of the way. The useful question is no longer only, <em>did it answer correctly?</em> The better question is, <em>can we inspect why?</em></p>
+
+        <p>That's where the practical work starts. We need better questions:</p>
+
+        <ul>
+          <li><strong>What evidence did it rely on?</strong> The answer should point back to specific documents, passages, records, or tool outputs.</li>
+          <li><strong>What evidence did it reject?</strong> Ignored context is part of the reasoning story, especially when distractors are highly similar.</li>
+          <li><strong>Where did uncertainty enter?</strong> If two sources conflict, the system should say so instead of blending them into confident soup.</li>
+          <li><strong>Can we replay the path?</strong> If I can't reproduce the answer, I can't debug the answer.</li>
+        </ul>
+
+        <p>Accuracy gets the applause. Traceability keeps the system from wandering into traffic.</p>
+
+        <h2>RAG without evidence is a trust fall</h2>
+
+        <p>Retrieval-augmented generation sounds simple from first principles. Retrieve relevant information, give it to the model, generate the answer. That's the happy path.</p>
+
+        <p>The unhappy path is where the engineering lives.</p>
+
+        <p>A production RAG system has several places to fail before the model even starts writing:</p>
+
+        <ul>
+          <li><strong>Chunking can hide meaning.</strong> Split a document badly and the key sentence loses its context.</li>
+          <li><strong>Search can retrieve the wrong neighbor.</strong> Semantic similarity is helpful, but similar is not the same as correct.</li>
+          <li><strong>Ranking can bury the useful source.</strong> The right passage might be present but too low in the pile to matter.</li>
+          <li><strong>The model can improvise over gaps.</strong> This is where the answer gets a little theatrical. Nobody asked for jazz hands, but here we are.</li>
+        </ul>
+
+        <p>The fix isn't to ban creativity from language models. The fix is to separate the job of <em>finding evidence</em> from the job of <em>explaining evidence</em>, then log both.</p>
+
+        <p>If an agent reads five documents and answers from two, I want that recorded. If it changes its mind after a tool call, I want that recorded too. If it skipped a source because it was outdated, beautiful. Write that down. That's not noise. That's the receipt.</p>
+
+        <h2>Evidence trails are an SDLC concern</h2>
+
+        <p>This is where the topic connects directly to software delivery. AI systems are becoming part of the SDLC, which means they inherit SDLC expectations: traceability, testing, rollback, review, and monitoring.</p>
+
+        <p>A model answer without an evidence trail is like a pull request with no diff.</p>
+
+        <p>Sure, the title says "fixed auth bug." Lovely. What changed? What files? What tests ran? What broke? What assumption did the author make? Without that trail, review becomes theater. Everyone nods, someone says ship it, and the pager starts stretching.</p>
+
+        <p>The same standard should apply to AI-generated work. If an agent writes a release note, summarizes a customer issue, drafts a policy response, or recommends a code change, the system should make the evidence path visible enough for a human to inspect.</p>
+
+        <p>That doesn't mean every user needs a wall of citations. It means the system should preserve the reasoning artifacts underneath the friendly answer:</p>
+
+        <ul>
+          <li><strong>Inputs.</strong> What did the system see?</li>
+          <li><strong>Retrieval results.</strong> What did it fetch, rank, and discard?</li>
+          <li><strong>Tool calls.</strong> What external actions did it take?</li>
+          <li><strong>Decision points.</strong> Where did it choose one path over another?</li>
+          <li><strong>Final support.</strong> Which evidence actually backs the answer?</li>
+        </ul>
+
+        <p>That's observability for reasoning-heavy systems. Not perfect mind reading. Not magic. Just enough structure to debug the machine when it smiles confidently and walks into a glass door.</p>
+
+        <h2>The next interface is confidence with receipts</h2>
+
+        <p>I don't think the winning AI products will be the ones that just stuff the most text into the prompt. That advantage will keep getting cheaper.</p>
+
+        <p>The better product will be the one that gives me confidence with receipts.</p>
+
+        <p>Show me the answer. Show me the source. Show me where the system was unsure. Show me the path well enough that I can trust, challenge, or fix it — that's the difference between a clever demo and something I would put in front of a real workflow on a Monday morning.</p>
+
+        <p>More context helps the model see more of the room. Evidence trails help the rest of us see what it did in there.</p>
+
+        <p>And if we're going to let these systems into the SDLC, that second part is not optional. It is the product.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-evidence-trail-is-the-product" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
