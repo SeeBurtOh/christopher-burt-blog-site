@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Cap Is the Canary · Christopher Burt</title>
+  <meta name="description" content="Uber capping AI tool spend at $1,500 per engineer per month sounds like a budget story. It's actually a signal about where enterprise AI really stands." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Production · Enterprise</p>
+        <h1 class="reveal">The Cap Is the Canary.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-07">June 7, 2026</time>
+          <span class="post-dot">·</span>
+          <span>5 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>Uber blew its 2026 AI tool budget in four months. So they did what any reasonable company does when a line item escapes: they put a lid on it. Starting sometime earlier this year, Uber capped per-employee spending on agentic coding tools — Cursor, Claude Code, that category — at $1,500 per tool per month.</p>
+
+        <p>Most coverage treated this as a cost-management story. Boring logistics. Company spends too much, company sets a limit. Next.</p>
+
+        <p>But the number itself is interesting. And what it implies is more interesting than the headline.</p>
+
+        <h2>The math Uber just did in public</h2>
+
+        <p>Simon Willison ran the numbers after the Bloomberg story broke, and they're worth sitting with. Median total compensation for a software engineer at Uber in the US is around $330,000 per year. The cap, assuming two tools at $1,500 each, comes out to roughly $36,000 per engineer annually. That's about 11% of median comp — for software that helps that engineer write software.</p>
+
+        <p>Eleven percent is not a rounding error. That's not a SaaS line item you forget about. That's a deliberate bet.</p>
+
+        <p>The interesting question isn't "why did Uber cap it?" The interesting question is: why did they cap it at <em>that number</em> and not lower?</p>
+
+        <p>A company that thought AI coding tools were glorified autocomplete would have set the cap at $200/month, or just pulled the plug until someone made a business case. A company that thought these tools were indispensable would have raised the budget instead of capping it. Uber did neither. They drew the line at something that looks, roughly, like "this is what the productivity gain is worth to us."</p>
+
+        <p>That is the canary. A budget cap at 11% of comp is not a rejection. It's a valuation.</p>
+
+        <h2>What product-market fit actually looks like at scale</h2>
+
+        <p>Before the Uber cap story, there was a quieter signal worth mentioning. Anthropic is rumored to be approaching its first profitable quarter. Usage by enterprise staff has been surprising finance teams at large companies — not because the tools failed, but because people are using them <em>far more</em> than anyone budgeted for.</p>
+
+        <p>That's the shape of real product-market fit. Not "users love it in a survey." Users burn through the budget before Q2 ends.</p>
+
+        <p>The problem is that enterprise AI adoption has been running two parallel tracks, and they haven't converged yet. Track one: individual engineers finding these tools genuinely useful, sometimes transformatively so. Track two: finance and procurement trying to build a framework for deciding what "useful" is worth paying for.</p>
+
+        <p>Uber's cap is the moment those two tracks met. And the friction is visible.</p>
+
+        <h2>The threshold AI hasn't cleared</h2>
+
+        <p>There's a specific thing that happens when technology crosses into the "obviously worth it at any price" tier. Companies don't cap cloud compute the same way. They scale it. They fight about <em>which</em> cloud, not whether to have one. AWS bills get big and nobody sets a $1,500 ceiling per developer per month on EC2 usage.</p>
+
+        <p>AI coding tools haven't hit that tier yet. Uber's cap is evidence. The tools are useful enough to keep, expensive enough to worry about, and not yet proven enough to just scale unconstrained.</p>
+
+        <p>That's actually a healthy place to be — and a much more honest signal than the breathless "every company is all-in on AI" narrative. Most enterprises are doing exactly what Uber did: turning the dial up carefully, watching what they get, and setting a ceiling while they figure it out.</p>
+
+        <p>The ceiling isn't skepticism. It's due diligence.</p>
+
+        <h2>Where the pressure goes next</h2>
+
+        <p>The $1,500 cap creates a specific kind of pressure on the tool vendors. At that spend level, the ROI question becomes very concrete very fast. An engineer burning $1,500/month in tokens needs to be shipping meaningfully more, with fewer defects, faster — in a way that's visible to someone who doesn't write code for a living.</p>
+
+        <p>That's a hard measurement problem. Most teams still don't have it solved. They know their engineers like the tools. They have anecdotes. They have vibes. What they don't have is a clean number that says: for every dollar we spend on AI coding assistance, we recover X dollars in engineering velocity.</p>
+
+        <p>That measurement gap is what I'd watch. The companies that close it first will be the ones that scale past the cap. The ones that don't will keep renewing at $1,500 forever, or quietly cut it back to $500 when the next budget cycle comes around.</p>
+
+        <p>Uber drew a line in the sand. The AI tool vendors now have to prove the line should move.</p>
+
+        <p>Until they do, the cap is the most honest thing an enterprise has said about AI in months.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-cap-is-the-canary" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
