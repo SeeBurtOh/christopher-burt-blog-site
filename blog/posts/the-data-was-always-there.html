@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Data Was Always There · Christopher Burt</title>
+  <meta name="description" content="Apple built a billion-device empire on a promise not to look inside it — and when AI made that data the whole game, they were already committed to not playing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Industry · Meta</p>
+        <h1 class="reveal">The Data Was Always There.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-09">June 9, 2026</time>
+          <span class="post-dot">·</span>
+          <span>6 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>Apple has two billion active devices in pockets, on wrists, and on nightstands around the world. Those devices hold your photos, your messages, your sleep data, your location history, your search queries, your health metrics. For years, Apple's pitch was simple: all of that stays with you. We don't look. We don't sell it. That's the product.</p>
+
+        <p>It was a genuinely good pitch. And it worked.</p>
+
+        <p>Then the AI era arrived — and it turned out the whole game was looking inside that data.</p>
+
+        <h2>What they were sitting on</h2>
+
+        <p>Think about what Apple actually had. Not abstractly — concretely. A corpus of real human conversation from iMessage, spanning decades, across demographics that no social platform could match. Photos with metadata: faces, locations, events, relationships. Voice from Siri queries. Health data granular enough to detect atrial fibrillation. Calendar context. Browsing patterns on Safari. Purchase behavior through Apple Pay.</p>
+
+        <p>Google had search. Meta had social graphs. Apple had something more intimate than either: the inside of people's actual lives, running on hardware they never put down.</p>
+
+        <p>That data advantage was always theoretical, because Apple made a structural decision early on not to centralize it. On-device processing. Differential privacy — a technique that lets Apple learn aggregate patterns without seeing individual records. Private Cloud Compute for the heavier lifts. All of it designed to keep Apple technically blind to what users were doing, even as the data sat right there.</p>
+
+        <p>That wasn't sloppiness. It was intentional. And for a long time, it was the right call.</p>
+
+        <h2>The strategy that worked, then didn't</h2>
+
+        <p>Apple's privacy position was a competitive moat. When Facebook was getting hauled before Congress, Apple was running billboard ads in Las Vegas: <em>What happens on your iPhone, stays on your iPhone.</em> When Google's advertising model made it existentially dependent on user surveillance, Apple could credibly claim it had no such dependency. Privacy became a differentiator, then a brand identity, then a religion.</p>
+
+        <p>Religions are hard to walk back.</p>
+
+        <p>The model-scale era changed the math. Training a frontier language model requires centralized data at a scale that on-device processing and differential privacy architectures weren't designed for. You need to see the data — all of it, together — to learn the patterns that make a model genuinely useful. Apple's entire infrastructure was architected around the opposite premise.</p>
+
+        <p>It's not that they lacked the compute, or the talent, or the money. It's that they had spent fifteen years building an organization, a culture, and a technical architecture optimized for a world where data minimization was the goal. And then data maximization became the competitive requirement.</p>
+
+        <h2>What Apple Intelligence revealed</h2>
+
+        <p>When Apple announced Apple Intelligence at WWDC 2024, the demo looked like a company that had figured it out. Siri understanding context across apps. Writing tools. Image generation. The integration with ChatGPT positioned as a feature rather than an admission.</p>
+
+        <p>That last part deserves more attention than it got.</p>
+
+        <p>Apple — the company that spent a decade telling you it would never let anyone else see your data — shipped an AI product where the hard parts are handled by OpenAI. The on-device model does what it can. Anything requiring actual capability gets routed to a third party, with a polite prompt asking permission first. It's architecturally honest, at least. But it's also a company announcing, in product form, that it cannot yet do what its competitors are doing.</p>
+
+        <p>Siri, meanwhile, remains Siri. It launched in 2011 as a parlor trick and spent fifteen years becoming a slower, more annoying version of that parlor trick. The promised personality overhaul got quietly delayed. The gap between what Apple demoed and what shipped is wide enough to drive a product roadmap through.</p>
+
+        <h2>The real cost of the bet</h2>
+
+        <p>I want to be careful here, because the easy version of this argument is lazy. Apple didn't miss AI because they were asleep. They made a deliberate values-driven bet — don't collect user data, build trust, win on hardware and software integration — and that bet paid enormous dividends for a very long time.</p>
+
+        <p>The uncomfortable truth is that the bet stopped paying at exactly the wrong moment.</p>
+
+        <p>The companies that vacuumed up user data for a decade, the ones that faced regulatory scrutiny and PR crises and congressional hearings over their data practices, are the ones that had the training fuel when it mattered. Apple's restraint, which looked like integrity, turned out to also be a handicap — not because the restraint was wrong, but because the industry moved in a direction that rewarded the opposite behavior.</p>
+
+        <p>You can hold both of those things at once. The privacy-first position was genuinely principled. And it left Apple structurally behind in the one technological shift that will define the next decade of computing.</p>
+
+        <p>They're playing catch-up now — on-device models, Private Cloud Compute, careful OpenAI integration — and doing it without the dataset leverage their competitors built over years of doing exactly what Apple told everyone else not to do.</p>
+
+        <p>The data was always there. They just made a promise not to use it.</p>
+
+        <p>Whether that promise ages as integrity or as a strategic error probably depends on how the next few years go. Ask me again in 2028.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-data-was-always-there" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
