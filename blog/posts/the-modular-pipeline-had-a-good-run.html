@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Modular Pipeline Had a Good Run · Christopher Burt</title>
+  <meta name="description" content="Google's Gemma 4 12B quietly retired the specialized encoder pipeline that most multimodal AI systems are still built on — and the implications for practitioners are bigger than the announcement suggested." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">AI · Architecture</p>
+        <h1 class="reveal">The Modular Pipeline Had a Good Run.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-08">June 08, 2026</time>
+          <span class="post-dot">·</span>
+          <span>4 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal">
+        <p>For the last few years, if you were building a multimodal AI system, the architecture basically wrote itself. You'd grab a vision encoder — something pretrained to turn images into vectors — wire it up to your language model, maybe add a projection layer so the shapes matched, and call it done. If you needed audio, you added an audio encoder to the front. The pipeline was modular, composable, and completely understood.</p>
+
+        <p>It worked. And Google just quietly retired it.</p>
+
+        <h2>What Gemma 4 12B actually changed</h2>
+
+        <p>When Google released <a href="https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemma-4-12b/">Gemma 4 12B on June 3rd</a>, most coverage focused on the benchmark numbers and the fact that it runs on a laptop. Both are real. But the architectural change buried in the release notes is more interesting than either.</p>
+
+        <p>Gemma 4 12B has no multimodal encoders. Not a smaller one. Not a faster one. None.</p>
+
+        <p>For vision, Google replaced the encoder with a single matrix multiplication plus positional embeddings and normalization. The LLM backbone takes over from there. For audio, they went further — no encoder at all. The raw audio signal gets projected directly into the same dimensional space as text tokens. The model handles everything from there as if it were just more tokens.</p>
+
+        <p>That's not a minor optimization. That's a different philosophy about where perception should happen.</p>
+
+        <h2>Why the encoder pipeline existed in the first place</h2>
+
+        <p>The modular approach made sense when it was invented. Foundation vision models like CLIP had been trained on billions of image-text pairs to build rich visual representations. Why throw that away and start from scratch? You wouldn't. You'd plug it in.</p>
+
+        <p>The problem is that plugging it in comes with costs that compound as systems get more ambitious. Separate encoders add memory footprint — you're loading multiple pretrained models, not one. They add latency — each modality gets processed independently before anything meaningful can happen between them. And they add a subtle alignment problem: the encoder learned to represent vision in service of <em>its</em> training objective, not yours. At the fusion point, you're hoping the representations line up well enough. Usually they do. Sometimes they don't, in ways that are hard to diagnose.</p>
+
+        <p>When the encoder is gone and the backbone handles everything, cross-modal reasoning can happen at every layer of the network, not just at the point where the outputs get stitched together. The model can attend to a word and an image region in the same pass, at the same depth, with the same machinery. That's a different kind of understanding.</p>
+
+        <h2>What this means for the pipelines being built right now</h2>
+
+        <p>If you're designing a multimodal system today, you're probably reaching for familiar components. A vision encoder here. A projection layer there. Maybe an audio encoder if you need it. That pattern is well-documented, has clear failure modes, and is supported by every major framework.</p>
+
+        <p>It's also the pattern that's being phased out.</p>
+
+        <p>I don't mean this as a warning to panic and rebuild everything. The modular pipeline will run in production for years — there's nothing wrong with it that demands an emergency migration. But if you're starting something new, or making architecture choices that will last a while, the direction is clear. The field is moving toward unified backbones that handle all modalities natively, and the tradeoffs are shifting in that direction too: less memory, less latency, fewer seams where things can go wrong.</p>
+
+        <p>The encoder isn't dying because it failed. It's retiring because the backbone got good enough to do the job itself.</p>
+
+        <h2>The pattern underneath the pattern</h2>
+
+        <p>There's a recurring shape to how ML architecture evolves. A specialized component does something the general model can't. It gets bolted on. It becomes standard. The general model trains longer, on more data, with better techniques — and eventually absorbs the specialized component entirely. The bolt-on becomes a footnote.</p>
+
+        <p>We saw it with attention mechanisms absorbing recurrence. We saw it with in-context learning absorbing fine-tuning for certain tasks. Now we're watching it happen with multimodal perception.</p>
+
+        <p>The lesson isn't that modular architectures are bad. They're often the right tool when the backbone isn't strong enough to handle everything. The lesson is that "the backbone isn't strong enough yet" has a shelf life.</p>
+
+        <p>Gemma 4 12B is sitting on a laptop with 16GB of RAM, processing images and audio without a single dedicated encoder, and hitting benchmark numbers that match much larger models built the old way.</p>
+
+        <p>The encoder had a good run. The backbone is ready now.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-modular-pipeline-had-a-good-run" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
