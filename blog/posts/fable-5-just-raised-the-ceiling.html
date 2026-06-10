@@ -112,6 +112,10 @@
 
         <p>Here's what I find professionally interesting. Instead of refusing sensitive queries, Fable hands them off to Opus 4.8 — and tells the user it did so. Graceful degradation instead of a brick wall.</p>
 
+        <figure style="margin: 2rem 0; text-align: center;">
+          <img src="/assets/images/fable5-graphic-3-safeguards.png" alt="Diagram showing Fable 5's safeguard fallback design — most sessions unaffected, flagged requests handed off gracefully" style="max-width: 100%; border-radius: 8px;" />
+        </figure>
+
         <p><em>Most sessions never touch the safeguards. The ones that do get a quietly capable fallback instead of a dead end.</em></p>
 
         <p>As someone who has spent more hours than I'll admit tuning guardrails, designing the failure mode as a fallback rather than a refusal is the kind of decision that reads as a footnote in a blog post and quietly saves you a hundred angry support tickets in production. A worse experience than the frontier model is still a dramatically better experience than "I can't help with that."</p>
