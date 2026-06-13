@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The merge test is the only eval that matters · Christopher Burt</title>
+  <meta name="description" content="Cognition's CodeReview eval asks one question: would a senior engineer actually merge this code? Most AI coding benchmarks don't." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Evals · Production</p>
+        <h1 class="reveal">The merge test is the only eval that matters.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-13">June 13, 2026</time>
+          <span class="post-dot">·</span>
+          <span>5 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal in-view">
+        <p>Here's a question I've started asking every time I evaluate an AI coding tool: would a senior engineer on my team actually merge this output?</p>
+
+        <p>Not "does it compile?" Not "does the test suite pass?" Not "does it solve the stated problem?" Those bars are real, but they're not the whole job. The whole job is: would a thoughtful engineer, seeing this code in a pull request, hit approve?</p>
+
+        <p>Most benchmarks don't ask that question. And I think that's costing us.</p>
+
+        <h2>The benchmark arms race and what it's actually measuring</h2>
+
+        <p>SWE-bench became the de facto leaderboard for AI coding assistants. The premise was solid: give the model a real GitHub issue, let it write a fix, run the existing test suite, see if the tests pass. Concrete, reproducible, competitive. Labs raced up the leaderboard.</p>
+
+        <p>Then Cognition looked more closely at the benchmark itself. In June 2025, they published an audit of SWE-bench Verified — the human-validated subset that was supposed to be the gold standard — and found that roughly <em>35% of its samples had at least one meaningful flaw</em>: tasks with marginal real-world value, problem specifications that were ambiguous or wrong, or test suites that didn't actually validate the solution correctly.</p>
+
+        <p>You're measuring model performance against a ruler that's off by a third. The scores aren't wrong exactly — they're just measuring something slightly different from what the leaderboard implies.</p>
+
+        <p>Cognition released SWE-bench Prime to address this: a filtered version that removes the flawed samples and adds harder, multi-file tasks sourced from real engineering work. It's a meaningful improvement. But it still sits in the same paradigm: pass the tests, score the point.</p>
+
+        <p>Passing tests is table stakes. It's not the finish line.</p>
+
+        <h2>The question behind the question</h2>
+
+        <p>When a senior engineer reviews a PR, they're not running a checklist. They're running a mental simulation of what happens after this code ships. They're asking: is this readable six months from now? Does this pattern fit how the rest of the codebase is organized? Does this add a dependency that will haunt us? Is this the obvious solution, or the clever one — and is clever what we want here?</p>
+
+        <p>Those questions don't show up in any test suite. They can't. They're the accumulated judgment that takes years to build, and they're exactly what separates code that <em>works</em> from code that <em>belongs</em>.</p>
+
+        <p>Cognition has been thinking about this gap. Their December 2024 <em>Cognition Evals</em> framework introduced a category called <strong>Enterprise Code Quality</strong>, with an eval called <strong>CodeReview</strong>. The setup is deliberately different from SWE-bench: an evaluator LLM is asked to role-play as a senior engineer doing a code review, then make a binary decision — accept or reject, as if deciding whether to merge the pull request. No test harness. Just judgment.</p>
+
+        <p>It's a small framing shift. It's also a more honest representation of what production deployment actually demands.</p>
+
+        <h2>Why this framing shift matters for tool selection</h2>
+
+        <p>Right now, most teams pick their AI coding assistant based on some combination of benchmark position, word of mouth, and a vibe from the demo. That's not entirely irrational — benchmarks track something, and demos reveal rough capability — but it's incomplete in a way that's going to show up at the worst possible time.</p>
+
+        <p>The gap appears in code review. It appears in the refactor that <em>technically works</em> but leaves a mess the next engineer has to untangle. It appears when the AI assistant writes code that passes CI and then introduces a subtle ordering dependency that breaks production six weeks later.</p>
+
+        <p>Evals that ask "does this code behave like code a senior engineer would approve?" are getting at a different signal than pass/fail on tests. They're asking about style consistency, architectural fit, over-engineering, under-documentation, security smell, the whole texture of professional judgment.</p>
+
+        <p>That signal is harder to automate and noisier to measure. Which is exactly why it matters more.</p>
+
+        <h2>The uncomfortable implication</h2>
+
+        <p>If you're deploying AI coding assistants and measuring ROI by lines of code generated or tasks completed, you may be building up a debt that won't show up on any dashboard until it does.</p>
+
+        <p>Technically-correct code that your team can't maintain isn't an asset. It's a mortgage.</p>
+
+        <p>The teams I respect most are the ones adding a layer of scrutiny that looks less like automated scoring and more like: send the AI-generated output through a senior engineer's eyes before it lands in main. Not for every commit — that's not scalable — but enough to build intuition about where the model's judgment actually fails under the hood.</p>
+
+        <p>Evals like CodeReview are a step toward automating that scrutiny. They're not perfect. An LLM playing the role of a code reviewer is still an approximation. But the approximation is asking the right question.</p>
+
+        <h2>What to do with this</h2>
+
+        <p>The practical takeaway isn't "wait for better benchmarks." It's: be deliberate about what you're actually measuring when you choose a coding tool, and be honest about what the current benchmarks leave out.</p>
+
+        <ul>
+          <li><strong>When evaluating tools internally,</strong> add a code quality review pass to your assessment — even just a few hours of senior engineer time looking at AI outputs with fresh eyes. What you find will tell you more than any leaderboard position.</li>
+          <li><strong>When reading benchmark numbers,</strong> ask what the eval is actually rewarding. Task completion and code quality are correlated, but they're not the same thing.</li>
+          <li><strong>When setting team expectations,</strong> frame AI coding assistants as first drafts, not final answers. The engineer who reviews the output isn't slowing down the process. They're the part of the process that makes the output usable.</li>
+        </ul>
+
+        <p>The merge test isn't exotic. It's what good engineers have always done. Making it the center of how we evaluate AI coding tools is overdue.</p>
+
+        <p>The question was always "would you ship this?" We just forgot to ask it.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-merge-test-is-the-only-eval-that-matters" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
