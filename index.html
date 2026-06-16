@@ -216,6 +216,45 @@
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
+
+      <div id="twin-chat" class="twin-chat reveal">
+        <div class="twin-chat-intro">
+          <p class="eyebrow">Digital twin</p>
+          <h2 class="twin-chat-title">Let's <span class="gradient-text">Chat Now!</span></h2>
+          <p class="twin-chat-lede">
+            Ask about my experience, skills, or background — this assistant uses the same
+            retrieval-augmented pipeline I built for my professional digital twin.
+          </p>
+        </div>
+
+        <div class="twin-chat-panel" aria-label="Chat with Christopher Burt's digital twin">
+          <div id="twin-messages" class="twin-messages" role="log" aria-live="polite" aria-relevant="additions">
+            <div class="twin-msg twin-msg--assistant twin-msg--welcome">
+              <div class="twin-msg-label">Christopher</div>
+              <div class="twin-msg-body">
+                Hi — I'm Christopher's AI twin. Ask me about AI automation, enterprise rollout,
+                vector databases, or my career at Ping Identity.
+              </div>
+            </div>
+          </div>
+
+          <form id="twin-form" class="twin-form" novalidate>
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+            <label class="sr-only" for="twin-input">Your message</label>
+            <textarea
+              id="twin-input"
+              rows="2"
+              placeholder="e.g. Do you have experience with vector databases?"
+              required
+            ></textarea>
+            <button type="submit" class="btn btn-primary">
+              <span class="btn-label">Send</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+          <p id="twin-status" class="twin-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -226,5 +265,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="chat.js"></script>
 </body>
 </html>
