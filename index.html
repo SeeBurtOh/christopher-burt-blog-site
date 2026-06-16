@@ -174,85 +174,75 @@
     <!-- CONTACT -->
     <section id="contact" class="section contact">
       <div class="contact-grid">
-        <div class="contact-copy">
-          <p class="eyebrow reveal">Contact</p>
-          <h2 class="reveal">Let's <span class="gradient-text">connect!</span></h2>
-          <p class="reveal">
-            I'm always open to interesting AI conversations — happy to chat about the
-            space, swap notes, or stay in touch.
-          </p>
-          <ul class="contact-meta reveal">
-            <li><span>Email</span><a href="mailto:christopher.r.burt@gmail.com">christopher.r.burt@gmail.com</a></li>
-            <li><span>Based</span>Remote · United States</li>
-          </ul>
-        </div>
+        <div id="twin-chat" class="twin-chat reveal">
+          <div class="twin-chat-intro">
+            <p class="eyebrow">Digital twin</p>
+            <h2 class="twin-chat-title">Let's <span class="gradient-text">Chat Now!</span></h2>
+            <p class="twin-chat-lede">
+              Ask about my experience, skills, or background — this assistant uses the same
+              retrieval-augmented pipeline I built for my professional digital twin.
+            </p>
+          </div>
 
-        <form id="contact-form" class="contact-form reveal"
-              action="https://formspree.io/f/xrejnyep"
-              method="POST"
-              novalidate>
-          <div class="field">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required autocomplete="name" />
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" required autocomplete="email" />
-          </div>
-          <div class="field">
-            <label for="company">Company <span class="optional">(optional)</span></label>
-            <input id="company" name="company" type="text" autocomplete="organization" />
-          </div>
-          <div class="field">
-            <label for="message">What cool stuff are you working on?</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-          <input type="hidden" name="_subject" value="New inquiry from christopherburt.com" />
-          <button type="submit" class="btn btn-primary btn-block">
-            <span class="btn-label">Send message</span>
-            <span class="btn-spinner" aria-hidden="true"></span>
-          </button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>
-      </div>
-
-      <div id="twin-chat" class="twin-chat reveal">
-        <div class="twin-chat-intro">
-          <p class="eyebrow">Digital twin</p>
-          <h2 class="twin-chat-title">Let's <span class="gradient-text">Chat Now!</span></h2>
-          <p class="twin-chat-lede">
-            Ask about my experience, skills, or background — this assistant uses the same
-            retrieval-augmented pipeline I built for my professional digital twin.
-          </p>
-        </div>
-
-        <div class="twin-chat-panel" aria-label="Chat with Christopher Burt's digital twin">
-          <div id="twin-messages" class="twin-messages" role="log" aria-live="polite" aria-relevant="additions">
-            <div class="twin-msg twin-msg--assistant twin-msg--welcome">
-              <div class="twin-msg-label">Christopher</div>
-              <div class="twin-msg-body">
-                Hi — I'm Christopher's AI twin. Ask me about AI automation, enterprise rollout,
-                vector databases, or my career at Ping Identity.
+          <div class="twin-chat-panel" aria-label="Chat with Christopher Burt's digital twin">
+            <div id="twin-messages" class="twin-messages" role="log" aria-live="polite" aria-relevant="additions">
+              <div class="twin-msg twin-msg--assistant twin-msg--welcome">
+                <div class="twin-msg-label">Christopher</div>
+                <div class="twin-msg-body">
+                  Hi — I'm Christopher's AI twin. Ask me about AI automation, enterprise rollout,
+                  vector databases, or my career at Ping Identity.
+                </div>
               </div>
             </div>
-          </div>
 
-          <form id="twin-form" class="twin-form" novalidate>
+            <form id="twin-form" class="twin-form" novalidate>
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+              <label class="sr-only" for="twin-input">Your message</label>
+              <textarea
+                id="twin-input"
+                rows="2"
+                placeholder="e.g. Do you have experience with vector databases?"
+                required
+              ></textarea>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-label">Send</span>
+                <span class="btn-spinner" aria-hidden="true"></span>
+              </button>
+            </form>
+            <p id="twin-status" class="twin-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Contact</p>
+          <form id="contact-form" class="contact-form"
+                action="https://formspree.io/f/xrejnyep"
+                method="POST"
+                novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+            </div>
+            <div class="field">
+              <label for="company">Company <span class="optional">(optional)</span></label>
+              <input id="company" name="company" type="text" autocomplete="organization" />
+            </div>
+            <div class="field">
+              <label for="message">What cool stuff are you working on?</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
-            <label class="sr-only" for="twin-input">Your message</label>
-            <textarea
-              id="twin-input"
-              rows="2"
-              placeholder="e.g. Do you have experience with vector databases?"
-              required
-            ></textarea>
-            <button type="submit" class="btn btn-primary">
-              <span class="btn-label">Send</span>
+            <input type="hidden" name="_subject" value="New inquiry from christopherburt.com" />
+            <button type="submit" class="btn btn-primary btn-block">
+              <span class="btn-label">Send message</span>
               <span class="btn-spinner" aria-hidden="true"></span>
             </button>
+            <p class="form-status" role="status" aria-live="polite"></p>
           </form>
-          <p id="twin-status" class="twin-status" role="status" aria-live="polite"></p>
         </div>
       </div>
     </section>
