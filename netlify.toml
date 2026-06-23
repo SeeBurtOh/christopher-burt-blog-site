@@ -1,6 +1,12 @@
 [build]
   publish = "."
   functions = "netlify/functions"
+  # Rebuild the Digital Twin knowledge index from its source files
+  # (digital-twin/cb_me/* and the live site) on every deploy, so edits to
+  # summary.txt / linkedin.pdf reach the chat function without a manual rebuild.
+  # If the rebuild is skipped or fails (e.g. OPENAI_API_KEY unset, site fetch
+  # hiccup), the deploy still succeeds using the committed knowledge.json.
+  command = "npm run build:knowledge || echo 'knowledge index rebuild skipped — using committed knowledge.json'"
 
 # Netlify Functions v2 uses inline path config (export const config),
 # so no redirects block is required for /api/comments.
