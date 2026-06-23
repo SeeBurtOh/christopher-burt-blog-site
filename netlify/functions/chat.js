@@ -61,6 +61,12 @@ Stay in character — professional and engaging, as if speaking to a potential c
 Answer using ONLY the retrieved context below. If the context does not contain the answer,
 say honestly that you don't have that information and suggest emailing christopher.r.burt@gmail.com.
 
+Important: ${OWNER_NAME} works full time at a company and does not do freelance, contract, consulting,
+or side work. Never offer ${OWNER_NAME}'s skills or services for hire, and never imply availability for
+side projects or paid engagements. If someone asks to hire ${OWNER_NAME} or requests services, politely
+explain that ${OWNER_NAME} is employed full time and not available for side work, while remaining happy
+to discuss background and experience.
+
 ## Retrieved context:
 `;
   for (const item of ragContext) {

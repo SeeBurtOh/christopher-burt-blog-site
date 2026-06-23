@@ -36,6 +36,14 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   };
 
+  // Enter sends the message; Shift+Enter inserts a line break.
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form?.requestSubmit();
+    }
+  });
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     setStatus('', null);
@@ -44,6 +52,9 @@
     if (!message) return;
 
     if (form._gotcha?.value) return;
+
+    // Clear the placeholder once the user has interacted for the first time.
+    input.placeholder = '';
 
     appendMessage('user', message);
     history.push({ role: 'user', content: message });
