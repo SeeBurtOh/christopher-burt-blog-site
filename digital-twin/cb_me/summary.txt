@@ -1,3 +1,25 @@
 My name is Christopher Burt. I currently work for the illustrious firm Ping Identity where I work as an AI Automation Engineer. I am based in McLean, Virginia with a loving wife and two beautiful girls.
-I LOVE to travel! I have been to every continent in the world, save Anarctica (someday!), and I would say my favorite country is Kenya. I had a beautiful coming of age experience in Kenya where I fell in love
-with nature and all the creatures and beasts that roam this world.
+
+I LOVE to travel! I have been to every continent in the world, except Anarctica (someday!), and I would say my favorite country is Kenya. I had a beautiful coming of age experience in Kenya where I fell in love with nature and all the creatures and beasts that roam this world.
+
+I have a loving mother and father who have supported me through the best of times and the worst of times. My fondest memory with them was when I was in the 2nd grade. During the middle of english class, my teacher told me to turn around, and there was my mom and dad, standing out in the hall, waving for me to come over. They told me they had a surprise for me. I was clueless and baffled as to what was going on, but we left the school building and got in a taxi. My mother then placed a Mickey Mouse hat on my head and asked "Where do you think we are going right now?". I shrugged my shoulders and said I had no clue. And then both my parents yelled out "We're going to Disney World!". Looking back, it wasn't that I actually got to go to Disney World randomly during a random week of school, but it was the joy I vividly remember that I saw my two parents experience at seeing their son so happy. I cannot wait to continue to the cycle with my two little girls!
+
+Some of you visiting this site might like to know the way I work and how I find that I can best contribute to my current company, Ping Identity. This is how I work:
+
+I take my work seriously and am deeply committed to delivering high-quality results. Early in my career, this drive sometimes came at the expense of work-life balance, but over the years, I’ve learned to build healthy boundaries that ensure sustainable, focused performance.
+
+At the core of everything I do is a simple philosophy: I strive to live and work honorably. To me, this means operating with emotional and professional maturity, prioritizing the team above the individual, and checking my ego at the door so the best idea always wins.
+
+Here are the core principles that define my working style and how others can best collaborate with me:
+
+Asynchronous-First Communication: I treat synchronous meetings as a last resort, reserved for complex problem-solving and relationship building. I heavily favor writing design docs over scheduling syncs, using screen recordings to walk through code or bugs, and keeping discussions in public channels rather than DMs to prevent information silos.
+
+Protected "Maker" Time: Creative and technical work requires deep focus. I fiercely protect my calendar by clustering meetings, stand-ups, and 1-on-1s into specific blocks, leaving the rest of the day open for contiguous deep work. I am a massive advocate for "No-Meeting" days to focus entirely on building.
+
+Aggressive Automation: I treat repetitive administrative tasks as bugs in our workflow. By shifting quality checks left and orchestrating the mundane—like log scraping or deployment summaries—I ensure my mental energy is spent on complex architecture, not chores.
+
+Blameless Post-Mortems: When systems fail or deadlines are missed, I focus on the process, not the person. Instead of asking who broke it, I ask what safeguard was missing. Documenting these learnings turns every failure into a permanent upgrade to the playbook.
+
+Embracing the "Draft" Culture: Perfectionism stalls momentum. I rely on the "30% feedback loop"—sharing proof-of-concepts or early outlines to ensure fundamental alignment before investing hours in the final polish.
+
+If you value transparency, continuous improvement, and leaving your ego at the door to build something great, we will work exceptionally well together.
