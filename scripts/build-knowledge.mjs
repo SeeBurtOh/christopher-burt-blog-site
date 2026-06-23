@@ -59,7 +59,12 @@ async function loadDocuments() {
   }
 
   console.log('Fetching website...');
-  documents.website = await fetchWebsiteText(WEBSITE_URL);
+  try {
+    documents.website = await fetchWebsiteText(WEBSITE_URL);
+  } catch (err) {
+    console.warn(`Warning: website fetch failed (${err.message}) — skipping website source.`);
+    documents.website = '';
+  }
 
   return documents;
 }
@@ -87,7 +92,12 @@ async function embedTexts(texts, apiKey) {
 async function main() {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    throw new Error('Set OPENAI_API_KEY before running build:knowledge');
+    // Graceful skip: leave the committed knowledge.json in place so the deploy
+    // can still proceed. The chat function falls back to the existing index.
+    console.warn(
+      'OPENAI_API_KEY not set — skipping knowledge rebuild, keeping committed knowledge.json.'
+    );
+    return;
   }
 
   const documents = await loadDocuments();
