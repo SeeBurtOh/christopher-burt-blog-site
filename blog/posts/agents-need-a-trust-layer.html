@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agents need a trust layer · Christopher Burt</title>
+  <meta name="description" content="Agentic AI needs identity, permissions, audit trails, and revocation before it can be trusted in production systems." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Agents · Governance</p>
+        <h1 class="reveal">Agents need a trust layer.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-06-30">June 30, 2026</time>
+          <span class="post-dot">·</span>
+          <span>5 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal in-view">
+        <p>I keep seeing agent demos that feel like magic right up until someone asks, “What permissions does it have?”</p>
+
+        <p>Then the room gets quiet.</p>
+
+        <p>Fair enough. Nothing ruins the vibe faster than realizing your cheerful little AI assistant can read customer records, open tickets, call APIs, summarize Slack, and possibly expense a panini if the tool schema gets too enthusiastic.</p>
+
+        <p>An agent without permissions is a chatbot. An agent with too many permissions is an incident report doing cardio.</p>
+
+        <p>That is where the AI community is heading next. Not toward another leaderboard with a name that sounds like a rejected Marvel villain. Toward trust.</p>
+
+        <p>Who is the agent? What is it allowed to do? Who approved the action? What data did it touch? Can we revoke access without bringing three systems and one emotionally fragile spreadsheet into the room?</p>
+
+        <p>Those are not boring enterprise questions. They are the difference between agentic AI as a useful coworker and agentic AI as a raccoon with OAuth.</p>
+
+        <figure style="margin: 2rem 0; text-align: center;">
+          <img src="/assets/images/agent-trust-layer.svg" alt="Layered architecture diagram showing humans and policies flowing through a trust layer before agents, tools, and data" style="max-width: 100%; border-radius: 8px;" />
+          <figcaption><em>The missing layer is not another prompt. It is identity, policy, permissions, auditability, and revocation sitting between intent and action.</em></figcaption>
+        </figure>
+
+        <h2>Capability got ahead of accountability</h2>
+
+        <p>The last two years have been about capability. Can the model reason? Can it call tools? Can it write code? Can it plan across steps?</p>
+
+        <p>Increasingly, yes.</p>
+
+        <p>But capability is not accountability. A model that can decide what to do next can also decide wrong at machine speed. That does not make agents bad. It makes them software.</p>
+
+        <p>Software needs boundaries.</p>
+
+        <p><a href="https://genai.owasp.org/llm-top-10/">OWASP now calls out “Excessive Agency”</a> in its Top 10 for LLM applications, warning that LLM systems become risky when they are given too much autonomy, too many permissions, or access to dangerous tools without proper control. That is the polite security way of saying: please stop handing the intern the production chainsaw.</p>
+
+        <p><a href="https://www.ibm.com/reports/data-breach">IBM’s 2025 Cost of a Data Breach report</a> puts the global average cost of a breach at $4.4 million. The same report says 97% of organizations that reported an AI-related security incident lacked proper AI access controls, and 63% lacked AI governance policies. Those numbers should make every agent architecture diagram sweat through its Patagonia vest.</p>
+
+        <h2>The missing layer sits between intent and action</h2>
+
+        <p>Most agent stacks are drawn like this:</p>
+
+        <p>User gives instruction. Agent reasons. Agent calls tools. Something happens.</p>
+
+        <p>That picture is too clean. Real life has procurement systems, production databases, regulated data, vendor APIs, secrets, stale permissions, and Bob from Finance who still has admin access because he “might need it someday.” Bob knows what he did.</p>
+
+        <p>A better architecture has a trust layer between intent and action.</p>
+
+        <p>That layer answers six questions before an agent does anything meaningful:</p>
+
+        <ul>
+          <li>Who is this agent acting as?</li>
+          <li>What task was it authorized to perform?</li>
+          <li>Which tools may it call?</li>
+          <li>What data may it read or change?</li>
+          <li>Which actions require human approval?</li>
+          <li>What evidence will exist afterward?</li>
+        </ul>
+
+        <p>This is identity and access management, but with a new actor on the stage. Humans have identities. Services have identities. Workloads have identities. Agents need identities too.</p>
+
+        <p>Not vibes. Identities.</p>
+
+        <h2>“The model decided” is not an audit strategy</h2>
+
+        <p>There is a sentence I hope disappears from enterprise AI pilots: “The model decided to do that.”</p>
+
+        <p>That is not an explanation. That is a shrug wearing a blazer.</p>
+
+        <p>If an agent closes a ticket, changes a configuration, sends an email, approves a workflow, or updates a customer record, we need a trail. Not because compliance people enjoy ruining everyone’s afternoon, although they do have suspiciously good stamina. We need it because systems that act on behalf of people have to be inspectable.</p>
+
+        <p>The audit log should show the user, the agent identity, the policy evaluated, the tool called, the data accessed, the approval if required, and the final action taken.</p>
+
+        <p>That sounds heavy until something breaks.</p>
+
+        <p>Then it sounds like oxygen.</p>
+
+        <h2>Agents need least privilege, not good intentions</h2>
+
+        <p>The old security rule still applies: give a system the minimum access it needs to do the job.</p>
+
+        <p>Agents make this harder because the “job” can be dynamic. A support agent may need to summarize a ticket, search docs, draft a reply, and escalate to engineering. That does not mean it needs permission to refund invoices, delete accounts, or browse the entire customer database like it is wandering through Costco on a Saturday.</p>
+
+        <p>Good agent design should feel a little annoying. Narrow scopes. Short-lived credentials. Tool-level permissions. Human checkpoints for irreversible actions. Clear revocation. Logs that someone can actually read without entering a fugue state.</p>
+
+        <p>A little friction is not failure. It is steering.</p>
+
+        <h2>Trust is the product feature nobody screenshots</h2>
+
+        <p>The AI community loves a good demo. I do too. Watching an agent turn a vague request into working code is delightful, especially while the rest of us sip coffee and pretend we knew it would work.</p>
+
+        <p>But demos hide the hard part. Production exposes it.</p>
+
+        <p>In production, the question is not “Can the agent do the thing?” The question is “Can the agent do the right thing, within the right boundaries, with the right evidence, repeatedly, when nobody is watching the demo tab?”</p>
+
+        <p>That is the trust layer.</p>
+
+        <p>The next serious agent platforms will compete on trust as much as intelligence. Identity, authorization, policy, observability, and auditability will become core architecture, not the appendix someone adds after the pilot gets uncomfortable.</p>
+
+        <p>Agents are actors in digital systems.</p>
+
+        <p>And every actor needs a badge, a boundary, and someone checking the receipts.</p>
+
+        <h2>Sources</h2>
+
+        <ul>
+          <li><a href="https://genai.owasp.org/llm-top-10/">OWASP Top 10 for LLM Applications</a>, including “Excessive Agency.”</li>
+          <li><a href="https://www.ibm.com/reports/data-breach">IBM 2025 Cost of a Data Breach Report</a>.</li>
+          <li><a href="https://www.verizon.com/business/resources/reports/dbir/">Verizon 2026 Data Breach Investigations Report page</a>, for breach-pattern context around human factors, credentials, vulnerabilities, and ransomware.</li>
+        </ul>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="agents-need-a-trust-layer" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
