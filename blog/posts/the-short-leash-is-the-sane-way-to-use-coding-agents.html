@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The short leash is the sane way to use coding agents · Christopher Burt</title>
+  <meta name="description" content="Coding agents are most useful when teams keep ownership, context, and accountability close to the humans who ship the code." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300e5ff'/%3E%3Cstop offset='1' stop-color='%237c4dff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%230a0a0f'/%3E%3Ctext x='50%25' y='52%25' text-anchor='middle' dominant-baseline='middle' font-family='Fraunces, serif' font-size='34' font-weight='600' fill='url(%23g)'%3ECB%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <a href="/" class="logo" aria-label="Christopher Burt — Home">
+      <svg viewBox="0 0 64 64" width="44" height="44" class="logo-mark" aria-hidden="true">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e5ff" />
+            <stop offset="1" stop-color="#7c4dff" />
+          </linearGradient>
+        </defs>
+        <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="url(#logo-gradient)" stroke-width="1.5" opacity="0.55" />
+        <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+              font-family="Fraunces, serif" font-size="30" font-weight="600"
+              fill="url(#logo-gradient)" letter-spacing="-1">CB</text>
+      </svg>
+      <span class="logo-name">Christopher Burt</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span></span><span></span><span></span>
+      </button>
+      <ul id="nav-list">
+        <li><a href="/#home" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/blog/" class="nav-link is-active">Blog</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article-header">
+        <p class="eyebrow reveal">Agents · Engineering</p>
+        <h1 class="reveal">The short leash is the sane way to use coding agents.</h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-07-04">July 04, 2026</time>
+          <span class="post-dot">·</span>
+          <span>8 min read</span>
+        </div>
+      </header>
+
+      <div class="article-content reveal in-view">
+        <p>I keep seeing the same coding-agent debate walk into the room wearing a different hat.</p>
+
+<p>One version says AI-authored code is the future and anyone resisting it is just protecting the candle industry from electricity. Another version says AI code is a liability grenade with syntax highlighting.</p>
+
+<p>Both versions are too neat.</p>
+
+<p>The useful question is not whether AI should write code. It already does. The useful question is whether a team can explain, test, maintain, and own the code after the agent leaves the chat window and wanders off to confidently solve someone else’s problem.</p>
+
+<p>That is where the short leash comes in.</p>
+
+<p>I do not mean a leash as punishment. I mean a leash as engineering hygiene. The kind where you love the dog, but you also know it will chase a squirrel into traffic if you let vibes run the household.</p>
+
+<p>Agents need boundaries for the same reason production systems need alerts, deployment gates, and people who say “no” in meetings. Capability is not the same thing as judgment.</p>
+
+<h2>The backlash is really about unowned code</h2>
+
+<p>Godot recently drew a hard line against AI-authored code contributions, with the concern captured bluntly in a <a href="https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions-we-cant-trust-heavy-users-of-ai-to-understand-their-code-enough-to-fix-it/">PC Gamer report</a>: maintainers cannot trust heavy users of AI to understand their code well enough to fix it.</p>
+
+<p>That sounds like an anti-AI position if you squint at it from a LinkedIn comment section. I read it differently.</p>
+
+<p>It is an ownership position.</p>
+
+<p>Open source maintainers are not running a code-shaped landfill. They inherit the consequences of every merged change: bugs, edge cases, platform quirks, confused users, security reports, build failures on an operating system nobody on earth admits to using, and the delightful little surprises that arrive three months later wearing a fake mustache.</p>
+
+<p>If a contributor cannot explain why the code works, the maintainer effectively becomes the author.</p>
+
+<p>That is not collaboration. That is a drive-by inheritance event.</p>
+
+<p>The same problem shows up inside companies, just with different vocabulary. Instead of maintainers, you have product teams. Instead of pull requests from strangers, you have internal agent-generated patches. Instead of public issue trackers, you have incident reviews where someone eventually says, “Wait, who wrote this?” and the room performs a brief archaeological dig.</p>
+
+<p>Somewhere in the sediment layer, between “quick fix” and “temporary helper,” there is a prompt.</p>
+
+<p>Nobody wants to be the person maintaining a clever diff that arrived without context. Especially if the clever diff is clever in the way raccoons are clever. Technically impressive. Morally chaotic. Somehow inside the ductwork.</p>
+
+<h2>The short leash is a workflow, not a personality disorder</h2>
+
+<p>The short-leash approach, described well in the <a href="https://blog.okturtles.org/2026/07/short-leash-ai-method/">Short Leash AI Method</a>, is not “never let the model touch code.” It is closer to pair programming with a very fast junior developer who has read every manual, occasionally invents a basement, and needs clear boundaries.</p>
+
+<p>You keep the work close. You keep the scope small. You inspect the output before momentum turns into fog.</p>
+
+<p>That usually means:</p>
+
+<ul>
+  <li><strong>Small tasks.</strong> Ask the agent for one focused change, not an entire feature arc with database migrations, UI polish, three new abstractions, and a philosophical stance on CSS.</li>
+  <li><strong>Frequent checkpoints.</strong> Review the diff early, while the blast radius is still measured in files, not regrets.</li>
+  <li><strong>Human-owned decisions.</strong> Let the agent propose options, but keep architecture, tradeoffs, and acceptance criteria with the person accountable for the system.</li>
+  <li><strong>Testable outputs.</strong> Every agent-produced change should move through the same tests, reviews, and deployment gates as human code. The compiler does not care who had the idea.</li>
+</ul>
+
+<p>This is not anti-autonomy. It is pro-feedback.</p>
+
+<p>Long-leash workflows feel magical when they work. “Build the feature” becomes a slot machine with a progress spinner. Sometimes you get a working implementation. Sometimes you get a confident tour of a solution that almost compiles and somehow added a second logging framework.</p>
+
+<p>The short leash gives the agent less room to wander into performance art.</p>
+
+<p>It also keeps the human engaged at the moment engagement matters most: before the solution hardens. Once a large agent-generated branch exists, the review problem changes. You are no longer evaluating a proposed idea. You are excavating a small civilization. There are customs. There is architecture. There may be a temple to an unnecessary helper function.</p>
+
+<p>Small changes keep the conversation alive.</p>
+
+<h2>The trap is confusing activity with leverage</h2>
+
+<p>Coding agents create motion. Lots of it. Files change. Tests appear. Comments multiply. The terminal scrolls like it is auditioning for a medical drama.</p>
+
+<p>Motion feels like progress because, in normal software work, progress often leaves footprints. The problem is that agents are exceptionally good at leaving footprints. A lot of footprints. Occasionally in circles.</p>
+
+<p>That is where teams get fooled.</p>
+
+<p>An agent can produce a large diff faster than a human can form a mild concern about it. But a large diff is not automatically leverage. Sometimes it is just inventory. And inventory has carrying costs: review time, mental overhead, regression risk, future maintenance, and the tiny emotional tax of opening a file and whispering, “What are we doing here?”</p>
+
+<p>The short leash forces a better question: did this change reduce the total burden on the team?</p>
+
+<p>If the answer is yes, keep going. If the answer is no, the agent did not accelerate engineering. It generated homework with better marketing.</p>
+
+<p>This matters because the ROI story around coding agents can get sloppy very quickly. It is easy to measure output. It is harder to measure rework. It is easy to count generated lines. It is harder to count the senior engineer quietly spending Friday afternoon convincing the codebase to stop being weird.</p>
+
+<p>And Friday afternoon is where the truth lives.</p>
+
+<h2>The best teams will use agents more carefully, not less</h2>
+
+<p>There is a tempting but lazy binary here: either embrace coding agents fully or ban them before they turn the repo into soup.</p>
+
+<p>Serious teams will do neither.</p>
+
+<p>They will build working habits around the parts agents are good at: first drafts, narrow refactors, test scaffolding, API exploration, migration sketches, repetitive glue work, and “please explain this haunted function before I touch it.”</p>
+
+<p>They will also put friction around the parts agents are bad at: unstated assumptions, broad architectural changes, security-sensitive flows, dependency churn, and anything where “looks right” is being asked to substitute for “is right.”</p>
+
+<p>The pattern is not complicated. It is just annoyingly adult:</p>
+
+<ul>
+  <li><strong>Use the agent to accelerate thought, not outsource judgment.</strong> Speed is helpful. Abdication is not.</li>
+  <li><strong>Require the human to narrate the change.</strong> If the developer cannot explain the diff, the diff is not ready.</li>
+  <li><strong>Prefer reversible steps.</strong> Small patches can be inspected, tested, and rolled back. Giant agent branches become weather systems.</li>
+  <li><strong>Measure rework.</strong> If a team saves two hours generating code and spends three hours untangling it, that is not productivity. That is an incident report doing cardio.</li>
+</ul>
+
+<p>This is where enterprise AI programs should pay attention. The difference between “AI coding is working” and “AI coding is making noise” will not show up in the demo. It will show up in review latency, defect rates, incident causes, onboarding confusion, and whether senior engineers quietly stop trusting the codebase.</p>
+
+<p>Trust erodes in small diffs.</p>
+
+<p>That should make leaders a little uncomfortable. Not scared. Uncomfortable. The useful kind. The kind that makes you ask whether your rollout has review patterns, ownership rules, and escalation paths, or whether you accidentally bought a fog machine and called it transformation.</p>
+
+<h2>Ownership is the unit of engineering</h2>
+
+<p>I do not think the future belongs to teams that proudly refuse AI help. That feels like refusing autocomplete because monks had better handwriting.</p>
+
+<p>But I also do not think the future belongs to teams that let agents roam the repo like an unsupervised Roomba in a room full of cables.</p>
+
+<p>The durable pattern is human-owned, agent-assisted development. The human sets the intent. The agent accelerates the work. The team keeps the standards. The tests still run. The reviewer still reviews. The person merging the code can still explain why it belongs.</p>
+
+<p>That last part matters most.</p>
+
+<p>Because production does not care that the code had an interesting origin story. Production does not read the prompt. Production receives the artifact, executes it with the warmth of a vending machine, and then reports whatever happened next.</p>
+
+<p>Code is not done when an agent produces it. Code is done when a team can own it on a random Tuesday, under pressure, after the original prompt has vanished into the scrollback void.</p>
+
+<p>The short leash is not a lack of ambition. It is the operating model for taking the tool seriously.</p>
+
+<p>Because the real risk is not that AI writes code.</p>
+
+<p>The real risk is that nobody does.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/" class="article-back">← Back to all posts</a>
+      </footer>
+    </article>
+
+    <section class="comments" data-comments="the-short-leash-is-the-sane-way-to-use-coding-agents" aria-label="Comments">
+      <header class="comments-head">
+        <h2>Comments <span class="comments-count">0</span></h2>
+        <p class="comments-note">No login needed. Be kind, stay on topic, no profanity.</p>
+      </header>
+      <ul class="comments-list">
+        <li class="comment-empty">Loading…</li>
+      </ul>
+      <form class="comments-form" novalidate>
+        <div class="field">
+          <label for="comment-name">Name</label>
+          <input id="comment-name" name="name" type="text" required maxlength="60" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="comment-message">Comment</label>
+          <textarea id="comment-message" name="message" rows="4" required maxlength="2000"></textarea>
+        </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+        <button type="submit" class="btn btn-primary">
+          <span class="btn-label">Post comment</span>
+        </button>
+        <p class="comments-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year"></span> Christopher Burt</span>
+    <span class="footer-dot">·</span>
+    <span>AI Automation Engineer</span>
+  </footer>
+
+  <script src="/script.js"></script>
+  <script src="/assets/comments.js" defer></script>
+</body>
+</html>
