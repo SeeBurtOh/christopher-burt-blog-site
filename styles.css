@@ -1,19 +1,19 @@
 /* ---------- Tokens ---------- */
 :root {
-  --bg: #07070b;
-  --bg-2: #0c0c12;
-  --surface: rgba(255, 255, 255, 0.03);
-  --surface-2: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #ececf1;
-  --text-dim: #a4a4b0;
-  --text-faint: #6b6b78;
-  --accent-a: #00e5ff;
-  --accent-b: #7c4dff;
+  --bg: #071B4B;
+  --bg-2: #0B2A6F;
+  --surface: rgba(203, 222, 255, 0.05);
+  --surface-2: rgba(203, 222, 255, 0.08);
+  --border: rgba(203, 222, 255, 0.14);
+  --border-strong: rgba(203, 222, 255, 0.30);
+  --text: #F5F9FF;
+  --text-dim: #9FB4E0;
+  --text-faint: #7186B5;
+  --accent-a: #6FD3FF;
+  --accent-b: #FFB020;
   --accent-grad: linear-gradient(135deg, var(--accent-a) 0%, var(--accent-b) 100%);
   --shadow-1: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 0 1px rgba(124, 77, 255, 0.25), 0 12px 40px rgba(0, 229, 255, 0.12);
+  --shadow-glow: 0 0 0 1px rgba(255, 176, 32, 0.25), 0 12px 40px rgba(111, 211, 255, 0.12);
   --radius: 14px;
   --radius-lg: 20px;
   --maxw: 1180px;
@@ -53,9 +53,9 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(60% 50% at 80% 0%, rgba(124, 77, 255, 0.18), transparent 60%),
-    radial-gradient(50% 40% at 0% 100%, rgba(0, 229, 255, 0.12), transparent 60%),
-    linear-gradient(180deg, #07070b 0%, #0a0a12 100%);
+    radial-gradient(60% 50% at 80% 0%, rgba(255, 176, 32, 0.18), transparent 60%),
+    radial-gradient(50% 40% at 0% 100%, rgba(111, 211, 255, 0.12), transparent 60%),
+    linear-gradient(180deg, #071B4B 0%, #0B2A6F 100%);
   z-index: -1;
 }
 
@@ -77,7 +77,7 @@ main { position: relative; z-index: 1; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 32px;
-  background: rgba(7, 7, 11, 0.6);
+  background: rgba(7, 27, 75, 0.82);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   border-bottom: 1px solid var(--border);
@@ -90,16 +90,22 @@ main { position: relative; z-index: 1; }
   font-weight: 600;
   letter-spacing: -0.01em;
 }
-.logo-mark {
-  border-radius: 12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
-  box-shadow: var(--shadow-1);
-  transition: transform 0.5s var(--ease);
+.brand-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border-strong);
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: var(--accent-b);
 }
-.logo:hover .logo-mark { transform: rotate(-4deg) scale(1.04); }
 .logo-name {
-  font-size: 17px;
-  letter-spacing: -0.01em;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 700;
+  font-stretch: 112%;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--text);
 }
 
 /* Nav */
@@ -114,8 +120,11 @@ main { position: relative; z-index: 1; }
 .nav-link {
   position: relative;
   padding: 8px 14px;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12.5px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--text-dim);
   border-radius: 999px;
   transition: color 0.25s var(--ease), background 0.25s var(--ease);
@@ -251,11 +260,11 @@ h3 {
               color 0.25s var(--ease);
 }
 .btn-primary {
-  color: #0a0a12;
+  color: #071B4B;
   background: var(--accent-grad);
-  box-shadow: 0 8px 30px rgba(0, 229, 255, 0.18), 0 2px 0 rgba(255,255,255,0.06) inset;
+  box-shadow: 0 8px 30px rgba(111, 211, 255, 0.18), 0 2px 0 rgba(255,255,255,0.06) inset;
 }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 36px rgba(124, 77, 255, 0.28); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 36px rgba(255, 176, 32, 0.28); }
 .btn-ghost {
   color: var(--text);
   background: var(--surface);
@@ -324,7 +333,7 @@ h3 {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(140deg, rgba(0, 229, 255, 0.5), rgba(124, 77, 255, 0.5));
+  background: linear-gradient(140deg, rgba(111, 211, 255, 0.5), rgba(255, 176, 32, 0.5));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -431,7 +440,7 @@ h3 {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(140deg, rgba(0,229,255,0.5), rgba(124,77,255,0.5));
+  background: linear-gradient(140deg, rgba(111, 211, 255,0.5), rgba(255, 176, 32,0.5));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -516,7 +525,7 @@ h3 {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(140deg, rgba(0, 229, 255, 0.5), rgba(124, 77, 255, 0.5));
+  background: linear-gradient(140deg, rgba(111, 211, 255, 0.5), rgba(255, 176, 32, 0.5));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -655,7 +664,7 @@ h3 {
 .article-content a {
   color: var(--accent-a);
   text-decoration: none;
-  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+  border-bottom: 1px solid rgba(111, 211, 255, 0.3);
   transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 .article-content a:hover {
@@ -902,9 +911,9 @@ h3 {
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: rgba(124, 77, 255, 0.6);
+  border-color: rgba(255, 176, 32, 0.6);
   background: rgba(255,255,255,0.05);
-  box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(255, 176, 32, 0.12);
 }
 .field.invalid input,
 .field.invalid textarea {
@@ -917,8 +926,8 @@ h3 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  border: 2px solid rgba(10,10,18,0.4);
-  border-top-color: #0a0a12;
+  border: 2px solid rgba(7,27,75,0.4);
+  border-top-color: #071B4B;
   display: none;
   animation: spin 0.7s linear infinite;
 }
@@ -977,13 +986,13 @@ h3 {
 }
 .twin-msg--user {
   align-self: flex-end;
-  border-color: rgba(0, 229, 255, 0.22);
-  background: rgba(0, 229, 255, 0.06);
+  border-color: rgba(111, 211, 255, 0.22);
+  background: rgba(111, 211, 255, 0.06);
 }
 .twin-msg--assistant {
   align-self: flex-start;
-  border-color: rgba(124, 77, 255, 0.22);
-  background: rgba(124, 77, 255, 0.06);
+  border-color: rgba(255, 176, 32, 0.22);
+  background: rgba(255, 176, 32, 0.06);
 }
 .twin-msg--welcome {
   box-shadow: var(--shadow-glow);
@@ -1022,8 +1031,8 @@ h3 {
 }
 .twin-form textarea:focus {
   outline: none;
-  border-color: rgba(124, 77, 255, 0.6);
-  box-shadow: 0 0 0 4px rgba(124, 77, 255, 0.12);
+  border-color: rgba(255, 176, 32, 0.6);
+  box-shadow: 0 0 0 4px rgba(255, 176, 32, 0.12);
 }
 .twin-form .btn {
   align-self: end;
@@ -1055,8 +1064,10 @@ h3 {
   z-index: 1;
   padding: 32px;
   text-align: center;
-  font-size: 13px;
-  color: var(--text-faint);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
   border-top: 1px solid var(--border);
 }
 .footer-dot { margin: 0 8px; }

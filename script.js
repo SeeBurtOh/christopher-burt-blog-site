@@ -124,7 +124,7 @@
         if (d2 < MOUSE_LINK * MOUSE_LINK) {
           const d = Math.sqrt(d2);
           const t = 1 - d / MOUSE_LINK;
-          ctx.strokeStyle = `rgba(124, 77, 255, ${t * 0.45})`;
+          ctx.strokeStyle = `rgba(255, 176, 32, ${t * 0.45})`;
           ctx.lineWidth = 0.8;
           ctx.beginPath();
           ctx.moveTo(mouse.x, mouse.y);
